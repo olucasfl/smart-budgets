@@ -1,0 +1,53 @@
+# Maven
+target/
+pom.xml.tag
+pom.xml.versions
+pom.xml.bak
+pom.xml.releaseBackup
+poms/
+*.mvn clean install.cmd
+*.mvn clean install.sh
+
+# Gradle
+build/
+.gradle
+.gradletasknamecache
+
+# IDE specific files
+.idea/         # IntelliJ IDEA
+.vscode/       # VS Code
+.eclipse/      # Eclipse
+.settings/     # Eclipse
+.project       # Eclipse
+.classpath     # Eclipse
+.factorypath   # Eclipse
+*.iml          # IntelliJ IDEA
+*.ipr          # IntelliJ IDEA
+*.iws          # IntelliJ IDEA
+out/           # Output directory for compiled classes in some IDEs
+
+# Logs and temporary files
+logs/
+*.log
+*.tmp
+*.swp
+*.bak
+
+# Environment variables and sensitive data
+# Store credentials in environment variables or a secure vault, not in the repo.
+.env
+application.properties
+application.yml
+
+# OS specific files
+.DS_Store      # macOS
+Thumbs.db      # Windows
+
+# Project specific files/directories (optional)
+# Uncomment or add as needed
+# node_modules/
+
+# Compiled class files and packages
+*.class
+*.jar
+*.war
