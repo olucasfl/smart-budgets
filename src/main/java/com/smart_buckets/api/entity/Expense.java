@@ -5,11 +5,12 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Table(name = "tb_expense", schema = "bd_smart-budgets")
+@Table(name = "tb_expense")
 @Entity
 @Data
 @AllArgsConstructor
@@ -24,14 +25,15 @@ public class Expense {
     private String name;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "expense-type")
+    @Column(name = "expense_type")
     private ExpenseType type;
 
     @Column(name = "amount")
     private BigDecimal amount;
 
-    @Column(name = "createAt")
-    private LocalDateTime createAt = LocalDateTime.now();
+    @CreationTimestamp
+    @Column(name = "createAt", updatable = false)
+    private LocalDateTime createAt;
 
     @Column(name = "description")
     private String description;
