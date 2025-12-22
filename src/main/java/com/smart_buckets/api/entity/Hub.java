@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Table(name = "tb_hub", schema = "bd_smart-buckets")
+@Table(name = "tb_hub")
 @Entity
 @Data
 @AllArgsConstructor
@@ -22,10 +22,10 @@ public class Hub {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "budget-limit")
+    @Column(name = "budget_limit")
     private BigDecimal budgetLimit;
 
-    @Column(name = "descirption")
+    @Column(name = "description")
     private String description;
 
     @OneToMany(mappedBy = "hub", cascade = CascadeType.ALL, orphanRemoval = true)

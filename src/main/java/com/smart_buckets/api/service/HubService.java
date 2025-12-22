@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +17,7 @@ public class HubService {
     private final HubRepository hubRepository;
 
     //Rota para criar um Hub
-    public void createHub (HubRequestDto dto) {
+    public HubSummaryResponseDto createHub (HubRequestDto dto) {
 
         Hub hub = new Hub();
 
@@ -26,21 +25,27 @@ public class HubService {
         hub.setBudgetLimit(dto.getBudgetLimit());
         hub.setDescription(dto.getDescription());
 
-        hubRepository.save(hub);
+        Hub saved = hubRepository.save(hub);
+
+        return new HubSummaryResponseDto(saved);
     }
 
     //Rota para listar todos os Hubs minimizados
     public List<HubSummaryResponseDto> findAllSummaryHub() {
 
-        return hubRepository.findAll()
-                .stream()
-                .map(hub -> new HubSummaryResponseDto(hub.getId(), hub.getName()))
-                .collect(Collectors.toList());
+        List<Hub> hubs = hubRepository.findAll();
+
+        return hubs.stream()
+                .map(HubSummaryResponseDto::new)
+                .toList();
     }
 
     //Rota para listar o Hub específico detalhado
-    public HubDetailResponseDto findHubById() {
+    public HubDetailResponseDto findHubById(Long id) {
 
-        return new HubDetailResponseDto();
+        Hub hub = hubRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Hub não encontrado"));
+
+        return new HubDetailResponseDto(hub);
     }
 }

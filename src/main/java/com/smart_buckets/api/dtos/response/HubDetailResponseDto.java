@@ -25,5 +25,10 @@ public class HubDetailResponseDto {
         this.name = hub.getName();
         this.budgetLimit = hub.getBudgetLimit();
         this.description = hub.getDescription();
+
+        this.expenses = hub.getExpenses()
+                .stream()
+                .map(ExpenseResponseDto::new)
+                .toList();
     }
 }
