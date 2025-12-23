@@ -1,9 +1,12 @@
 package com.smart_buckets.api.service;
 
 import com.smart_buckets.api.dtos.request.ExpenseRequestDto;
+import com.smart_buckets.api.dtos.request.HubRequestDto;
 import com.smart_buckets.api.dtos.response.ExpenseResponseDto;
+import com.smart_buckets.api.dtos.response.HubSummaryResponseDto;
 import com.smart_buckets.api.entity.Expense;
 import com.smart_buckets.api.entity.Hub;
+import com.smart_buckets.api.exceptions.NotFoundException;
 import com.smart_buckets.api.repository.ExpenseRepository;
 import com.smart_buckets.api.repository.HubRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +22,7 @@ public class ExpenseService {
     public ExpenseResponseDto createExpense(Long hubId ,ExpenseRequestDto dto) {
 
         Hub hub = hubRepository.findById(hubId)
-                .orElseThrow(() -> new RuntimeException("Hub não encontrado"));
+                .orElseThrow(() -> new NotFoundException("Hub não encontrado"));
 
         Expense expense = new Expense();
 
@@ -37,8 +40,23 @@ public class ExpenseService {
     public void deleteExpense(Long hubId, Long id) {
 
     Expense expense = expenseRepository.findByIdAndHubId(id, hubId)
-                    .orElseThrow(() -> new RuntimeException("Gasto não encontrado"));
+                    .orElseThrow(() -> new NotFoundException("Gasto não encontrado"));
 
         expenseRepository.delete(expense);
+    }
+
+    public ExpenseResponseDto updateExpense(ExpenseRequestDto dto, Long id, Long hubId) {
+
+        Expense expense = expenseRepository.findByIdAndHubId(id, hubId)
+                        .orElseThrow(() -> new NotFoundException("Gasto não encontrado"));
+
+        expense.setName(dto.getName());
+        expense.setType(dto.getType());
+        expense.setAmount(dto.getAmount());
+        expense.setDescription(dto.getDescription());
+
+        expenseRepository.save(expense);
+
+        return new ExpenseResponseDto(expense);
     }
 }

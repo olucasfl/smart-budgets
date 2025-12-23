@@ -1,6 +1,7 @@
 package com.smart_buckets.api.controller;
 
 import com.smart_buckets.api.dtos.request.HubRequestDto;
+import com.smart_buckets.api.dtos.response.ExpenseResponseDto;
 import com.smart_buckets.api.dtos.response.HubDetailResponseDto;
 import com.smart_buckets.api.dtos.response.HubSummaryResponseDto;
 import com.smart_buckets.api.service.HubService;
@@ -46,5 +47,13 @@ public class HubController {
         hubService.deleteHub(id);
 
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<HubSummaryResponseDto> updateHub(
+            @RequestBody HubRequestDto dto,
+            @PathVariable Long id) {
+
+        return ResponseEntity.ok(hubService.updateHubSummary(id, dto));
     }
 }

@@ -4,6 +4,7 @@ import com.smart_buckets.api.dtos.request.HubRequestDto;
 import com.smart_buckets.api.dtos.response.HubDetailResponseDto;
 import com.smart_buckets.api.dtos.response.HubSummaryResponseDto;
 import com.smart_buckets.api.entity.Hub;
+import com.smart_buckets.api.exceptions.NotFoundException;
 import com.smart_buckets.api.repository.HubRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -44,7 +45,7 @@ public class HubService {
     public HubDetailResponseDto findHubById(Long id) {
 
         Hub hub = hubRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Hub não encontrado"));
+                .orElseThrow(() -> new NotFoundException("Hub não encontrado"));
 
         return new HubDetailResponseDto(hub);
     }
@@ -52,8 +53,22 @@ public class HubService {
     public void deleteHub(Long id) {
 
         Hub hub = hubRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Hub não encontrado"));
+                .orElseThrow(() -> new NotFoundException("Hub não encontrado"));
 
         hubRepository.delete(hub);
+    }
+
+    public HubSummaryResponseDto updateHubSummary(Long id, HubRequestDto dto) {
+
+        Hub hub = hubRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Hub não encontrado"));
+
+        hub.setName(dto.getName());
+        hub.setDescription(dto.getDescription());
+        hub.setBudgetLimit(dto.getBudgetLimit());
+
+        hubRepository.save(hub);
+
+        return new HubSummaryResponseDto(hub);
     }
 }
