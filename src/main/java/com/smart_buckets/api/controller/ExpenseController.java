@@ -21,4 +21,14 @@ public class ExpenseController {
 
         return ResponseEntity.ok(expenseService.createExpense(hubId, dto));
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteExpense(
+            @PathVariable Long hubId,
+            @PathVariable Long id
+    ) {
+        expenseService.deleteExpense(hubId, id);
+
+        return ResponseEntity.noContent().build();
+    }
 }

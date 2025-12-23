@@ -39,4 +39,12 @@ public class HubController {
 
         return ResponseEntity.ok(hubService.findHubById(id));
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteHub(@PathVariable Long id) {
+
+        hubService.deleteHub(id);
+
+        return ResponseEntity.noContent().build();
+    }
 }

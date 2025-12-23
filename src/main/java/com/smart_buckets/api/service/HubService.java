@@ -48,4 +48,12 @@ public class HubService {
 
         return new HubDetailResponseDto(hub);
     }
+
+    public void deleteHub(Long id) {
+
+        Hub hub = hubRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Hub não encontrado"));
+
+        hubRepository.delete(hub);
+    }
 }

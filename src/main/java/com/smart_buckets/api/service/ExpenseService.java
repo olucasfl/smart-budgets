@@ -33,4 +33,12 @@ public class ExpenseService {
 
         return new ExpenseResponseDto(saved);
     }
+
+    public void deleteExpense(Long hubId, Long id) {
+
+    Expense expense = expenseRepository.findByIdAndHubId(id, hubId)
+                    .orElseThrow(() -> new RuntimeException("Gasto não encontrado"));
+
+        expenseRepository.delete(expense);
+    }
 }
