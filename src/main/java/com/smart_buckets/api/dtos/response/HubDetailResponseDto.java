@@ -1,11 +1,9 @@
 package com.smart_buckets.api.dtos.response;
 
-import com.smart_buckets.api.entity.Expense;
 import com.smart_buckets.api.entity.Hub;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.math.BigDecimal;
 import java.util.List;
 

@@ -1,9 +1,7 @@
 package com.smart_buckets.api.service;
 
 import com.smart_buckets.api.dtos.request.ExpenseRequestDto;
-import com.smart_buckets.api.dtos.request.HubRequestDto;
 import com.smart_buckets.api.dtos.response.ExpenseResponseDto;
-import com.smart_buckets.api.dtos.response.HubSummaryResponseDto;
 import com.smart_buckets.api.entity.Expense;
 import com.smart_buckets.api.entity.Hub;
 import com.smart_buckets.api.exceptions.NotFoundException;
