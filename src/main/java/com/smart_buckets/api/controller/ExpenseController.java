@@ -1,9 +1,7 @@
 package com.smart_buckets.api.controller;
 
 import com.smart_buckets.api.dtos.request.ExpenseRequestDto;
-import com.smart_buckets.api.dtos.request.HubRequestDto;
 import com.smart_buckets.api.dtos.response.ExpenseResponseDto;
-import com.smart_buckets.api.dtos.response.HubSummaryResponseDto;
 import com.smart_buckets.api.service.ExpenseService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
