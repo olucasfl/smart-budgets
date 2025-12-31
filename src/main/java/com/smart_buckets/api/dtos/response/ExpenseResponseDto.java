@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -18,6 +19,7 @@ public class ExpenseResponseDto {
     private BigDecimal amount;
     private String description;
     private ExpenseType type;
+    private LocalDateTime createAt;
 
     public ExpenseResponseDto(Expense expense) {
         this.id = expense.getId();
@@ -25,5 +27,6 @@ public class ExpenseResponseDto {
         this.amount = expense.getAmount();
         this. description = expense.getDescription();
         this.type = expense.getType();
+        this.createAt = expense.getCreateAt();
     }
 }
